@@ -10,6 +10,7 @@ The User will be able to search for bags of coffee using the search bar feature.
 The User will be able to see all details of a specific bag of coffee by clicking the "details and rate" button.
 The User will be able to rate the coffee in this view, giving it a 1-5 star rating and a detailed written review. 
 The User will be able to view all "rated" coffees in the "Tasted" page.
+User can delete a "rated" coffee.
 The User will be able to see details of the author of this application (myself) and also have links to my linked in and github.
 
 ## Table of Contents
