@@ -5,7 +5,7 @@ Coffee.init(
   {
     name: DataTypes.STRING,
     roaster: DataTypes.STRING,
-    date: DataTypes.String,
+    date: DataTypes.STRING,
     location: DataTypes.STRING,
     origin: DataTypes.STRING,
     rating: {
@@ -29,6 +29,5 @@ Coffee.init(
   }
 );
 
-module.exports = {
-  Coffee,
-};
+module.exports = { Coffee }
+ 

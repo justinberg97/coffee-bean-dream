@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { Coffee } = require("../models/Coffee.js");
+const { Op } = require("sequelize");
+const { Coffee }  = require("../models/Coffee")
 
 router.get("/", async (req, res, next) => {
   try {
@@ -9,7 +10,7 @@ router.get("/", async (req, res, next) => {
   } catch (e) {
     next(e);
   }
-});
+});  // working correctly!
 
 router.get("/:coffeeId", async (req, res, next) => {
   try {
@@ -24,7 +25,7 @@ router.get("/:coffeeId", async (req, res, next) => {
   } catch (e) {
     next(e);
   }
-});
+}); // working correctly!
 
 router.post("/", async (req, res) => {
   const { name, roaster, date, location, origin, image } = req.body;
@@ -42,10 +43,11 @@ router.post("/", async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: "Failed to add a new coffee bag" });
   }
-});
+});  // it works!!
 
 router.put("/:coffeeId/rate", async (req, res, next) => {
   try {
+    const { rating, review} = req.body;
     const coffee = await Coffee.findByPk(req.params.coffeeId);
     if (!coffee) return res.status(404).send("Coffee not found");
     await coffee.update({ rating, review });
@@ -53,13 +55,13 @@ router.put("/:coffeeId/rate", async (req, res, next) => {
   } catch (e) {
     next(e);
   }
-});
+});  // it works!! 
 
 router.get("/tasted", async (req, res, next) => {
   try {
     const triedCoffees = await Coffee.findAll({
-      where: { rating: !isNull },
-    });
+      where: { rating: { [Op.ne]: null },
+  }});
 
     if (!triedCoffees) {
       res.status(404);
@@ -70,18 +72,18 @@ router.get("/tasted", async (req, res, next) => {
   } catch (e) {
     next(e);
   }
-});
+}); // it works!! 
 
 router.delete("/:coffeeId", async (req, res, next) => {
   try {
     const deleted = await Coffee.destroy({
-      where: { id: req.params.coffeeIdId },
+      where: { id: req.params.coffeeId },
     });
     if (!deleted) return res.status(404).send("Coffee not found");
     res.status(204).send();
   } catch (e) {
     next(e);
   }
-});
+});  // it works!  
 
 module.exports = router;

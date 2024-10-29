@@ -1,0 +1,32 @@
+{
+  "name": "coffee-bean-dream",
+  "version": "1.0.0",
+  "description": "Coffee Bean Dream",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "server-dev": "nodemon server.js",
+    "seed": "node server/seed.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/preset-env": "^7.15.0",
+    "cors": "^2.8.5",
+    "dotenv": "16.0.0",
+    "express": "^4.17.1",
+    "morgan": "1.10.0",
+    "nodemon": "^3.1.7",
+    "parcel": "^2.8.3",
+    "sequelize": "^6.23.2",
+    "sqlite3": "^5.1.1"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.25.7",
+    "@testing-library/react": "^12.0.0",
+    "babel-jest": "^27.1.0",
+    "jest": "^27.5.1",
+    "process": "^0.11.10"
+  }
+}

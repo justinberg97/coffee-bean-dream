@@ -1,6 +1,6 @@
 const { coffees } = require("./seedData.js");
-const { db } = require("./db");
-const { Coffee } = require("../models/Coffee.js");
+const { db } = require("./db.js");
+const { Coffee } = require("./models/Coffee.js"); // ignore warning
 const seed = async () => {
   try {
     await db.sync({ force: true });
