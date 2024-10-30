@@ -1,1 +1,11 @@
-<p>home works!</p>
+<header class="coffee-list-title">
+    <H4>Here is a list of all purchased coffees!</H4>
+</header>
+<div *ngFor="let coffee of coffees$ | async">
+    <h2>{{coffee.name}}</h2>
+    <p>Roaster: {{coffee.roaster}}</p>
+    <p>Date: {{coffee.date}}</p>
+    <p>Location: {{coffee.location}}</p>
+    <p>Origin: {{coffee.origin}}</p>
+    <p>Image: {{coffee.image}}</p>
+</div>
