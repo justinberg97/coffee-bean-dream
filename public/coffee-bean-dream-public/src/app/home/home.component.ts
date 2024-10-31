@@ -4,6 +4,7 @@ import { Coffee } from '../interface';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule} from '@angular/forms'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ import { FormsModule} from '@angular/forms'
 export class HomeComponent implements OnInit {
 coffees$!: Observable<Coffee[]>;
 newCoffee: Coffee = {
+  id: 0,
   name: '',
   roaster: '',
   date: '',
@@ -23,7 +25,7 @@ newCoffee: Coffee = {
   image: ''
 };
 
-constructor(private coffeeService: CoffeesService) {}
+constructor(private coffeeService: CoffeesService, private router: Router) {}
 
 ngOnInit(): void {
   this.loadCoffees();
@@ -45,8 +47,25 @@ addCoffee(): void {
   );
 }
 
+viewDetails(coffeeId: number): void {
+  this.router.navigate(['/coffee', coffeeId]);
+}
+
+deleteCoffee(coffeeId: number): void {
+  this.coffeeService.deleteCoffee(coffeeId).subscribe(
+    () => {
+      console.log('You have successfully deleted the coffee bag', coffeeId);
+      this.loadCoffees();
+    },
+    (error) => {
+      console.error('Could not delete coffee, no Id exists for that bag', error)
+    }
+  );
+}
+
 clearForm(): void {
   this.newCoffee = {
+    id: 0,
     name: '',
     roaster: '',
     date: '',

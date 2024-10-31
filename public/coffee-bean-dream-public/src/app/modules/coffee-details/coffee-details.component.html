@@ -1,0 +1,19 @@
+<div class="p-4">
+    <h2 class="text-2xl font-bold">{{ coffee.name }}</h2>
+    <p><strong>Roaster:</strong> {{ coffee.roaster }}</p>
+    <p><strong>Date:</strong> {{ coffee.date }}</p>
+    <p><strong>Location:</strong> {{ coffee.location }}</p>
+    <p><strong>Origin:</strong> {{ coffee.origin }}</p>
+    <img [src]="coffee.image" alt="{{ coffee.name }}" class="mt-4 w-full h-auto rounded">
+
+    <div class="mt-6">
+        <h3 class="text-lg font-semibold">Add Your Rating and Review</h3>
+        <label class="block mb-2">Rating:</label>
+        <input type="number" [(ngModel)]="rating" min="1" max="5" class="border rounded w-full p-2 mb-4">
+       
+        <label class="block mb-2">Review:</label>
+        <textarea [(ngModel)]="review" class="border rounded w-full p-2 mb-4"></textarea>
+       
+        <button (click)="submitReview()" class="bg-blue-500 text-white rounded py-2 px-4 hover:bg-blue-600">Submit</button>
+    </div>
+</div>

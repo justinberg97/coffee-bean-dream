@@ -1,24 +1,40 @@
-<header class="coffee-list-title">
-    <H4>Here is a list of all purchased coffees!</H4>
-</header>
-<div *ngFor="let coffee of coffees$ | async">
-    <h2>{{coffee.name}}</h2>
-    <p>Roaster: {{coffee.roaster}}</p>
-    <p>Date: {{coffee.date}}</p>
-    <p>Location: {{coffee.location}}</p>
-    <p>Origin: {{coffee.origin}}</p>
-    <p>Image: {{coffee.image}}</p>
-</div>
-
-<div class="add-coffee-form w-1/2 p-4">
-     <h4>Add a New Coffee Bag</h4>
-      <form (ngSubmit)="addCoffee()" #coffeeForm="ngForm">
-         <div> <label>Name:</label> <input type="text" name="name" [(ngModel)]="newCoffee.name" required>
-         </div> <div> <label>Roaster:</label> <input type="text" name="roaster" [(ngModel)]="newCoffee.roaster" required>
-         </div> <div> <label>Date:</label> <input type="text" name="date" [(ngModel)]="newCoffee.date" required>
-         </div> <div> <label>Location:</label> <input type="text" name="location" [(ngModel)]="newCoffee.location" required>
-         </div> <div> <label>Origin:</label> <input type="text" name="origin" [(ngModel)]="newCoffee.origin" required>
-         </div> <div> <label>Image URL:</label> <input type="text" name="image" [(ngModel)]="newCoffee.image" required> 
-        </div> <button type="submit">Add Coffee</button> 
-    </form> 
+<div class="flex flex-wrap bg-purple-500 p-4 text-white mt-4">
+     <!-- Coffee List Section --> <div class="w-full md:w-1/2 p-4">
+         <header class="coffee-list-title"> <h4 class="text-lg font-bold mb-4">Here is a list of all purchased coffees!</h4>
+         </header> 
+         <div *ngFor="let coffee of coffees$ | async" class="mb-4 p-4 border rounded shadow bg-white text-black"> 
+            <h2 class="text-xl font-semibold">{{ coffee.name }}</h2> 
+            <p>Roaster: {{ coffee.roaster }}</p> 
+            <div class="flex space-x-2"> 
+                <button (click)="viewDetails(coffee.id)" class="bg-green-500 text-white rounded py-1 px-3 hover:bg-green-600">See Full Details</button> 
+                <button (click)="deleteCoffee(coffee.id)" class="bg-red-500 text-white rounded py-1 px-3 hover:bg-red-600">Delete</button> 
+            </div> 
+        </div> 
+    </div> <!-- Add Coffee Form Section --> 
+    <div class="w-full md:w-1/2 p-4"> <h4 class="text-lg font-bold mb-4">Add a New Coffee Bag</h4> 
+        <form (ngSubmit)="addCoffee()" #coffeeForm="ngForm" class="bg-white p-4 rounded shadow"> 
+            <div class="mb-4"> 
+                <label class="block mb-2">Name:</label> 
+                <input type="text" name="name" placeholder="Name of Bag" [(ngModel)]="newCoffee.name" required class="border rounded w-full p-2"> 
+            </div> 
+            <div class="mb-4"> 
+                <label class="block mb-2">Roaster:</label> 
+                <input type="text" name="roaster" placeholder="Roaster" [(ngModel)]="newCoffee.roaster" required class="border rounded w-full p-2"> 
+            </div> 
+            <div class="mb-4"> 
+                <label class="block mb-2">Date:</label> 
+                <input type="text" name="date" placeholder="Purchased on" [(ngModel)]="newCoffee.date" required class="border rounded w-full p-2"> 
+            </div> 
+            <div class="mb-4"> 
+                <label class="block mb-2">Location:</label> 
+                <input type="text" name="location" placeholder="Coffee Shop" [(ngModel)]="newCoffee.location" required class="border rounded w-full p-2"> 
+            </div> 
+            <div class="mb-4">
+                 <label class="block mb-2">Origin:</label> 
+                <input type="text" name="origin" placeholder="Origin" [(ngModel)]="newCoffee.origin" required class="border rounded w-full p-2"> 
+            </div> <div class="mb-4"> 
+                <label class="block mb-2">Image URL:</label> <input type="text" name="image" placeholder="Image" [(ngModel)]="newCoffee.image" required class="border rounded w-full p-2"> 
+            </div> <button type="submit" class="bg-blue-500 text-white rounded py-2 px-4 hover:bg-blue-600">Add Coffee</button> 
+        </form> 
     </div> 
+</div>

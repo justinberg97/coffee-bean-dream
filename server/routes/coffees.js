@@ -45,10 +45,10 @@ router.post("/", async (req, res) => {
   }
 });  // it works!!
 
-router.put("/:coffeeId/rate", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const { rating, review} = req.body;
-    const coffee = await Coffee.findByPk(req.params.coffeeId);
+    const coffee = await Coffee.findByPk(req.params.id);
     if (!coffee) return res.status(404).send("Coffee not found");
     await coffee.update({ rating, review });
     res.json(coffee);

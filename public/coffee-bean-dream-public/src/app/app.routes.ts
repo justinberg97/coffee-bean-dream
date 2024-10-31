@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutMeModule } from './modules/about-me.module';
 import { AboutMeComponent } from './modules/about-me/about-me.component';
 import { TastedItemsComponent } from './modules/tasted-items/tasted-items.component';
+import { CoffeeDetailsComponent } from './modules/coffee-details/coffee-details.component';
 // import { AboutMeComponent } from './modules/about-me/about-me.component';
 
 export const routes: Routes = [
@@ -20,8 +21,13 @@ export const routes: Routes = [
   },
 
   {
-    path: 'tasted-items',
+    path: 'coffee',
     component: TastedItemsComponent
+  },
+  
+  {
+    path: 'coffee/:id',
+    component: CoffeeDetailsComponent
   }
 
 ]
