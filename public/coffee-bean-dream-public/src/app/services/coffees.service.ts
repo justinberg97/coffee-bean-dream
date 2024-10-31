@@ -12,4 +12,8 @@ private apiUrl = 'http://localhost:3000/api/coffees';
 getCoffees(): Observable<Coffee[]> {
   return this.http.get<Coffee[]>(this.apiUrl)
 }
+
+addCoffee(coffee: Coffee): Observable<Coffee> {
+  return this.http.post<Coffee>(this.apiUrl, coffee)
+}
 }

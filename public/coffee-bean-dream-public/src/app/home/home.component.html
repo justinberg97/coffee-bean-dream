@@ -9,3 +9,16 @@
     <p>Origin: {{coffee.origin}}</p>
     <p>Image: {{coffee.image}}</p>
 </div>
+
+<div class="add-coffee-form w-1/2 p-4">
+     <h4>Add a New Coffee Bag</h4>
+      <form (ngSubmit)="addCoffee()" #coffeeForm="ngForm">
+         <div> <label>Name:</label> <input type="text" name="name" [(ngModel)]="newCoffee.name" required>
+         </div> <div> <label>Roaster:</label> <input type="text" name="roaster" [(ngModel)]="newCoffee.roaster" required>
+         </div> <div> <label>Date:</label> <input type="text" name="date" [(ngModel)]="newCoffee.date" required>
+         </div> <div> <label>Location:</label> <input type="text" name="location" [(ngModel)]="newCoffee.location" required>
+         </div> <div> <label>Origin:</label> <input type="text" name="origin" [(ngModel)]="newCoffee.origin" required>
+         </div> <div> <label>Image URL:</label> <input type="text" name="image" [(ngModel)]="newCoffee.image" required> 
+        </div> <button type="submit">Add Coffee</button> 
+    </form> 
+    </div> 
