@@ -28,4 +28,8 @@ updateCoffee(coffee: Coffee): Observable<Coffee> {
 deleteCoffee(id: number): Observable<void> {
   return this.http.delete<void>(`${this.apiUrl}/${id}`)
 }
+
+getTastedCoffees(): Observable<Coffee[]> {
+  return this.http.get<Coffee[]>(`${this.apiUrl}/tasted`)
+}
 }

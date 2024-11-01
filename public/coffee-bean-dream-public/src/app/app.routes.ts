@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutMeModule } from './modules/about-me.module';
 import { AboutMeComponent } from './modules/about-me/about-me.component';
-import { TastedItemsComponent } from './modules/tasted-items/tasted-items.component';
+import { TastedCoffeesComponent } from './modules/tasted-coffees/tasted-coffees.component';
 import { CoffeeDetailsComponent } from './modules/coffee-details/coffee-details.component';
 // import { AboutMeComponent } from './modules/about-me/about-me.component';
 
@@ -22,7 +22,7 @@ export const routes: Routes = [
 
   {
     path: 'coffee',
-    component: TastedItemsComponent
+    component: TastedCoffeesComponent
   },
   
   {

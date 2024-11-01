@@ -31,7 +31,7 @@ export class CoffeeDetailsComponent implements OnInit {
     this.coffeeService.getCoffeeById(id).subscribe(
       (data) => {
         this.coffee = data;
-        console.log(data);
+        console.log(this.coffee);
       },
       (error) => {
         console.error('Cannot find the coffee details', error)

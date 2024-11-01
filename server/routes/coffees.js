@@ -63,11 +63,11 @@ router.get("/tasted", async (req, res, next) => {
       where: { rating: { [Op.ne]: null },
   }});
 
-    if (!triedCoffees) {
+    if (triedCoffees.length === 0) {
       res.status(404);
       next();
     } else {
-      res.send(triedCoffees);
+      res.status(200).send(triedCoffees);
     }
   } catch (e) {
     next(e);

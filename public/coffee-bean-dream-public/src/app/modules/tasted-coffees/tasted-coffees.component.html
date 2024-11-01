@@ -1,0 +1,15 @@
+<div class="flex flex-wrap bg-purple-500 p-4 text-white mt-4">
+    <!-- Coffee List Section --> <div class="w-full md:w-1/2 p-4">
+        <header class="coffee-list-title"> <h4 class="text-lg font-bold mb-4">Here is a list of all tasted Coffees!</h4>
+        </header> 
+        <div *ngFor="let coffee of tastedCoffees$ | async" class="mb-4 p-4 border rounded shadow bg-white text-black"> 
+           <h2 class="text-xl font-semibold">{{ coffee.name }}</h2> 
+           <p>Roaster: {{ coffee.roaster }}</p> 
+           <p>Date: {{ coffee.date }}</p> 
+           <p>Location: {{ coffee.location }}</p> 
+           <p>Origin: {{ coffee.origin }}</p> 
+           <p>Rating {{ coffee.rating}}</p>
+           <p>Review: {{ coffee.review }}</p> 
+           <p>Image: {{ coffee.image }}</p> 
+        </div>
+        </div>
