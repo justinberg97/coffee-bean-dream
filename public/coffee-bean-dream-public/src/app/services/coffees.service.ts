@@ -14,6 +14,7 @@ getCoffees(): Observable<Coffee[]> {
 }
 
 addCoffee(coffee: Coffee): Observable<Coffee> {
+  console.log(this.apiUrl, coffee)
   return this.http.post<Coffee>(this.apiUrl, coffee)
 }
 

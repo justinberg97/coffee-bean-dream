@@ -41,6 +41,7 @@ router.post("/", async (req, res) => {
     });
     res.status(201).json(newCoffee);
   } catch (err) {
+    console.error(err)
     res.status(500).json({ error: "Failed to add a new coffee bag" });
   }
 });  // it works!!

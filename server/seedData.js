@@ -9,7 +9,7 @@ module.exports = {
       rating: null,
       review: null,
       image:
-        "https://www.pexels.com/photo/person-holding-white-and-black-ceramic-mug-4829080/",
+        "https://images.pexels.com/photos/4829080/pexels-photo-4829080.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       name: "Ace of Spades",
@@ -20,7 +20,7 @@ module.exports = {
       rating: null,
       review: null,
       image:
-        "https://www.pexels.com/photo/person-holding-white-and-black-ceramic-mug-4829080/",
+        "https://images.pexels.com/photos/4829080/pexels-photo-4829080.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       name: "Wild at Heart",
@@ -31,7 +31,7 @@ module.exports = {
       rating: null,
       review: null,
       image:
-        "https://www.pexels.com/photo/person-holding-white-and-black-ceramic-mug-4829080/",
+        "https://images.pexels.com/photos/4829080/pexels-photo-4829080.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       name: "Oak Cliff Dark Roast",
@@ -42,7 +42,7 @@ module.exports = {
       rating: null,
       review: null,
       image:
-        "https://www.pexels.com/photo/person-holding-white-and-black-ceramic-mug-4829080/",
+        "https://images.pexels.com/photos/4829080/pexels-photo-4829080.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       name: "Oak Cliff Medium Roast",
@@ -53,7 +53,7 @@ module.exports = {
       rating: null,
       review: null,
       image:
-        "https://www.pexels.com/photo/person-holding-white-and-black-ceramic-mug-4829080/",
+        "https://images.pexels.com/photos/4829080/pexels-photo-4829080.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
   ],
 };

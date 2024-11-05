@@ -9,10 +9,10 @@ This application is to keep track of bags of coffee purchased by the user.
 The User will be able to keep track of bags of coffee purchased by viewing all bags on the homepage.
 The User will be able to add a bag of coffee using the add-item form on the homepage.
 The User will be able to search for bags of coffee using the search bar feature located on the header.
-The User will be able to see all details of a specific bag of coffee by clicking the "details and rate" button on each bag of coffee on the homepage.
-The User will be able to rate the coffee in this view, giving it a 1-5 star rating and a detailed written review. 
+The User will be able to see all details of a specific bag of coffee by clicking the "details" button on each bag of coffee on the homepage.
+The User will be able to rate the coffee in this view, giving it a 1-5 rating and a detailed written review. 
 The User will be able to view all "rated" coffees in the "Tasted" page.
-User can delete a "rated" coffee.
+User can delete a coffee in the "coffee details section"
 The User will have links to my linkedin, github, and email on the footer.
 The User will will be able to see details about me on the "about me" page. 
 

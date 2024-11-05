@@ -47,8 +47,8 @@ export class CoffeeDetailsComponent implements OnInit {
   };
 
   this.coffeeService.updateCoffee(updatedCoffee).subscribe(
-    () => {
-      console.log('Successfully reviewd');
+    (data) => {
+      console.log('Successfully reviewd', data);
       this.router.navigate(['/']);
     },
     (error) => {

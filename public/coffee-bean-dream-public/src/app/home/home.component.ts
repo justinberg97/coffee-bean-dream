@@ -35,6 +35,7 @@ loadCoffees(): void {
 }
 
 addCoffee(): void {
+  console.log(this.newCoffee)
   this.coffeeService.addCoffee(this.newCoffee).subscribe(
     (data) => {
       console.log('Coffee added:', data);

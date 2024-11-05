@@ -5,7 +5,7 @@
         <p class="text-gray-600"><strong>Date:</strong> {{ coffee.date }}</p>
         <p class="text-gray-600"><strong>Location:</strong> {{ coffee.location }}</p>
         <p class="text-gray-600"><strong>Origin:</strong> {{ coffee.origin }}</p>
-        <img [src]="coffee.image" alt="{{ coffee.name }}" class="mt-4 w-full h-auto rounded-lg shadow-md">
+        <img [src]="(coffee.image)" alt="{{ coffee.name }}" class="mt-4 w-half h-1/2 rounded-lg shadow-md">
 
         <div class="mt-6">
             <h3 class="text-lg font-semibold text-gray-800 mb-2">Add Your Rating and Review</h3>
