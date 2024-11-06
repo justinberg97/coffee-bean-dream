@@ -24,15 +24,5 @@ export class TastedCoffeesComponent implements OnInit {
   loadTastedCoffees(): void {
     this.tastedCoffees$ = this.coffeeService.getTastedCoffees();
   }
-
-  getStars(rating: number): string[] {
-    const stars: string[] = [];
-
-    for (let i = 1; i <= 5; i ++) {
-      const effectiveRating = rating || 0;
-      stars.push(i <= effectiveRating ? '★' : '☆')
-    }
-    return stars;
-  }
 }
 
