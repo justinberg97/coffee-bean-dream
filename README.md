@@ -1,6 +1,6 @@
 ## Title
 
-Coffee Bean Dream 
+Coffee Bean Dream by Justin Berg 
 
 ## Description/User Story
 
@@ -40,7 +40,7 @@ Everything you need to keep track of your coffee purchasing and tasting.
 Ensure to run the following commands 
 
 1. `npm i` 
-2. `node server/seed.js`
+2. `node server/seed.js` 
 3. `npm run server-dev`
 4. In the public folder, run `ng serve`
 

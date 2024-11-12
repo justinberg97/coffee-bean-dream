@@ -7,7 +7,7 @@ Coffee.init(
     roaster: DataTypes.STRING,
     date: DataTypes.STRING,
     location: DataTypes.STRING,
-    origin: DataTypes.STRING,
+    origin: DataTypes.STRING, 
     rating: {
       type: DataTypes.INTEGER,
       allowNull: true,
