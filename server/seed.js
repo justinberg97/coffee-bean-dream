@@ -11,6 +11,10 @@ const seed = async () => {
   } catch (error) {
     console.error(error);
   }
+
+  db.authenticate()
+  .then(() => console.log("✅ MySQL connection established successfully."))
+  .catch((err) => console.error("❌ Unable to connect to MySQL:", err));
 };
 
 seed();

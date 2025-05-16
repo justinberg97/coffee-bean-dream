@@ -1,9 +1,8 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
-const path = require("path");
 
-const db = new Sequelize({
-  dialect: "sqlite",
-  storage: path.join(__dirname, "db.sqlite"),
+const db = new Sequelize("coffee_db", "root", "", {
+  host: "localhost",
+  dialect: "mysql",
   logging: false,
 });
 
