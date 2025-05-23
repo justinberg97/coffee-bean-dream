@@ -1,0 +1,52 @@
+# version: '3.8' <-- not needed
+
+services:
+  # MySQL Database Service
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root # Set your root password (consider using .env for production)
+      MYSQL_DATABASE: coffee_db # The database name used in server/db.js
+    ports:
+      - "3306:3306" # Optional: Expose MySQL port to host for local access (e.g., MySQL Workbench)
+    volumes:
+      - mysql_data:/var/lib/mysql # Persistent storage for MySQL data
+    restart: unless-stopped # Restart policy
+
+  # Node.js Backend Service
+  backend:
+    build:
+      context: . # Build context is the root of the project
+      dockerfile: server/Dockerfile # Path to the backend Dockerfile
+    ports:
+      - "3000:3000" # Map host port 3000 to container port 3000
+    environment:
+      DB_HOST: mysql # Hostname of the MySQL service within the Docker network
+      DB_USER: root
+      DB_PASSWORD: root # Should match MYSQL_ROOT_PASSWORD in mysql service
+      DB_NAME: coffee_db # Should match MYSQL_DATABASE in mysql service
+      PORT: 3000 # The port your Node.js app listens on
+    depends_on:
+      - mysql # Ensure MySQL starts before the backend
+    volumes:
+      - .:/usr/src/app # Mount local project directory to container for development
+      - /usr/src/app/node_modules # Exclude node_modules from host mount to prevent issues
+    restart: unless-stopped
+    # Use 'nodemon server.js' for development, 'node server.js' for production
+    # command: npm run server-dev # This would be if you use nodemon, ensure it's in package.json scripts
+    # For production, use the CMD in the Dockerfile, or override here if needed:
+    # command: node server.js
+
+  # Angular Frontend Service
+  frontend:
+    build:
+      context: . # Build context is the root of the project
+      dockerfile: public/coffee-bean-dream-public/Dockerfile # Path to the frontend Dockerfile
+    ports:
+      - "80:80" # Map host port 80 to container port 80 (standard HTTP port)
+    depends_on:
+      - backend # Ensure backend starts before frontend (optional, but good for local dev)
+    restart: unless-stopped
+
+volumes:
+  mysql_data: # Define the named volume for MySQL data persistence
