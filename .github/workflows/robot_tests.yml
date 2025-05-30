@@ -1,0 +1,62 @@
+name: Robot Framework Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-robot-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x' # Use a compatible Python version
+
+    - name: Install Robot Framework and Libraries
+      run: |
+        pip install robotframework
+        pip install robotframework-requests # Install RequestsLibrary
+
+    - name: Start Backend Services (using Docker Compose)
+      # This step assumes you have docker-compose available on the runner.
+      # GitHub-hosted runners generally have Docker and Docker Compose pre-installed.
+      run: |
+        docker-compose up -d mysql backend # Start only mysql and backend services
+        echo "Waiting for backend to be ready..."
+        # Add a delay or a health check to ensure the backend is fully up before running tests
+        sleep 15 # Adjust this sleep time as needed, or implement a proper health check
+      # Ensure the working directory is the root of your project where docker-compose.yml resides
+      working-directory: .
+
+    - name: Run Robot Framework Tests
+      run: robot tests/robot/backend_api.robot
+      # The tests will run after the backend services are started
+      working-directory: . # Ensure the command is run from the root of the project
+      env:
+        # If your backend URL needs to be different in CI, set it here.
+        # For example, if 'backend' is the service name in docker-compose:
+        # BACKEND_URL: http://backend:3000
+        # However, since the tests are running on the same host as docker-compose,
+        # localhost should work if the ports are exposed correctly.
+        # If you need to access services by their Docker Compose service name,
+        # you might need to run the tests within a service container or use a custom network.
+        # For simplicity, we'll assume localhost:3000 is accessible.
+        # If your backend is not exposed on localhost:3000, you'll need to adjust the URL
+        # in backend_api.robot or pass it as an argument to robot command.
+        # For this setup, the backend service in docker-compose.yml exposes port 3000 to the host.
+        # So, localhost:3000 should work.
+        BACKEND_URL: http://localhost:3000/api/coffees
+
+    - name: Stop Backend Services
+      if: always() # Ensure this step runs even if tests fail
+      run: docker-compose down
+      working-directory: .
