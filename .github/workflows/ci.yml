@@ -1,0 +1,49 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js for Backend
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # Specify a Node.js version compatible with your backend
+
+    - name: Install Backend Dependencies
+      run: npm install
+      working-directory: . # Assuming package.json for backend is in the root
+
+    # - name: Run Backend Tests
+    #   run: npm test
+    #   working-directory: . # Assuming package.json for backend is in the root
+
+    - name: Set up Node.js for Frontend
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # Specify a Node.js version compatible with your frontend
+
+    - name: Install Frontend Dependencies
+      run: npm install
+      working-directory: public/coffee-bean-dream-public/ # Path to your frontend package.json
+
+    # - name: Run Frontend Tests
+    #   run: npm test
+    #   working-directory: public/coffee-bean-dream-public/ # Path to your frontend package.json
+
+    - name: Build Backend Docker Image
+      run: docker build -t coffee-bean-dream-backend -f server/Dockerfile .
+
+    - name: Build Frontend Docker Image
+      run: docker build -t coffee-bean-dream-frontend -f public/coffee-bean-dream-public/Dockerfile .
