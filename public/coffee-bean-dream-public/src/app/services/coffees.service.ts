@@ -7,7 +7,7 @@ import { Coffee } from '../interface';
   providedIn: 'root'
 })
 export class CoffeesService {
-private apiUrl = 'http://localhost:3000/api/coffees';
+private apiUrl = '/api/coffees';
   constructor(private http: HttpClient) { }
 getCoffees(): Observable<Coffee[]> {
   return this.http.get<Coffee[]>(this.apiUrl)
