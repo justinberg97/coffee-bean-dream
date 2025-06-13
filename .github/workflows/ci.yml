@@ -71,3 +71,6 @@ jobs:
       if: always() # Ensure cleanup happens even if previous steps fail
       run: docker-compose down --volumes --remove-orphans
       working-directory: .
+
+    - name: Docker Compose Up
+      run: docker-compose -f docker-compose.yml up --build -d
