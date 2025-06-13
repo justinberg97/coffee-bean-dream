@@ -5,39 +5,46 @@ services:
   mysql:
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: # Set your root password (consider using .env for production)
-      MYSQL_DATABASE: coffee_db # The database name used in server/db.js
+      MYSQL_ROOT_PASSWORD: root # Your password
+      MYSQL_DATABASE: coffee_db
     ports:
-      - "3306:3306" # Optional: Expose MySQL port to host for local access (e.g., MySQL Workbench)
+      - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql # Persistent storage for MySQL data
-    restart: unless-stopped # Restart policy
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+    # 👇 ADD THIS HEALTHCHECK BLOCK 👇
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--user=root", "--password=root"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # Node.js Backend Service
   backend:
     build:
-      context: . # Build context is the root of the project
-      dockerfile: server/Dockerfile # Path to the backend Dockerfile
+      context: .
+      dockerfile: server/Dockerfile
     ports:
-      - "3000:3000" # Map host port 3000 to container port 3000
-    command: sh -c "npm run seed && npm run server-dev"
+      - "3000:3000"
+    # Your original command is fine now
+    command: sh -c "npm run seed && npm run start"
     environment:
-      DB_HOST: mysql # Hostname of the MySQL service within the Docker network
+      DB_HOST: mysql
       DB_USER: root
-      DB_PASSWORD: # Should match MYSQL_ROOT_PASSWORD in mysql service
-      DB_NAME: coffee_db # Should match MYSQL_DATABASE in mysql service
-      PORT: 3000 # The port your Node.js app listens on
+      DB_PASSWORD: # Your password
+      DB_NAME: coffee_db
+      PORT: 3000
+      MYSQL_ROOT_PASSWORD: root
+    # 👇 MODIFY depends_on LIKE THIS 👇
     depends_on:
-      - mysql # Ensure MySQL starts before the backend
+      mysql:
+        condition: service_healthy
     volumes:
-      - .:/usr/src/app # Mount local project directory to container for development
-      - /usr/src/app/node_modules # Exclude node_modules from host mount to prevent issues
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
     restart: unless-stopped
-    # Use 'nodemon server.js' for development, 'node server.js' for production
-    # command: npm run server-dev # This would be if you use nodemon, ensure it's in package.json scripts
-    # For production, use the CMD in the Dockerfile, or override here if needed:
-    # command: node server.js
 
+# ... (frontend and volumes sections are unchanged) ...
   # Angular Frontend Service
   frontend:
     build:
