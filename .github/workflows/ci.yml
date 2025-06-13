@@ -73,4 +73,4 @@ jobs:
       working-directory: .
 
     - name: Docker Compose Up
-      run: docker-compose -f docker-compose.yml up --build -d
+      run: docker compose -f docker-compose.yml up --build -d
