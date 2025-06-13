@@ -47,3 +47,6 @@ jobs:
 
     - name: Build Frontend Docker Image
       run: docker build -t coffee-bean-dream-frontend -f public/coffee-bean-dream-public/Dockerfile .
+
+    - name: Start Docker Containers
+  run: docker-compose -f docker-compose.yml up --build -d
