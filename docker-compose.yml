@@ -48,5 +48,34 @@ services:
       - backend # Ensure backend starts before frontend (optional, but good for local dev)
     restart: unless-stopped
 
+    # Selenium Chrome Service for UI testing
+  selenium-chrome:
+    image:  selenium/standalone-chrome:latest # Pre-built Selenium image with Chrome
+    shm_size: 2g # Shared memory for Chrome to run smoothly
+    ports:
+      - "4444:4444" # Expose Selenmium Hub port for potential external access
+      - "7900:7900" # Expose VNC port for remote viewing (optional, useful for debugging)
+    environment:
+      SE_EVENT_BUS_HOST: selenium-hub # Not strictly needed for standalone, but good practice if scaling
+      SE_EVENT_BUS_PUBLISH_PORT: 4442
+      SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+
+    # Robot Framework Test Runner Service
+  robot-tests:
+    build:
+      context: . # Build context is the root of the project.
+      dockerfile: Dockerfile.robot # Path to the Robot Framework Dockerfile.
+    depends_on:
+      - frontend # Ensure front-end is running before tests
+      - selenium-chrome # Ensure selenium is up before running tests.
+    volumes:
+      - ./tests/ui:/app/tests/ui  # Mount the RF tests into container
+    command: robot tests/ui/smoke_test.robot  # Command to run tests
+    environment:
+      # Pass the Selenium Hub URL and frontend URL to the Robot Framework container
+      SELENIUM_HUB: http://selenium-chrome:4444/wd/hub
+      URL: http://frontend:80
+    restart: on-failure # Restart if tests fail (optional)
+
 volumes:
   mysql_data: # Define the named volume for MySQL data persistence
