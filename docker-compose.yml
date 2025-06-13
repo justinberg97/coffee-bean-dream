@@ -51,7 +51,7 @@ services:
     # Selenium Chrome Service for UI testing
   selenium-chrome:
     image:  selenium/standalone-chrome:latest # Pre-built Selenium image with Chrome
-    shm_size: 2g # Shared memory for Chrome to run smoothly
+    shm_size: 4g # Shared memory for Chrome to run smoothly
     ports:
       - "4444:4444" # Expose Selenmium Hub port for potential external access
       - "7900:7900" # Expose VNC port for remote viewing (optional, useful for debugging)

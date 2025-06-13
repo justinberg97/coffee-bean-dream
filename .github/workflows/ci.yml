@@ -17,11 +17,6 @@ jobs:
       # Checks out your repository code into the runner environment.
       uses: actions/checkout@v4
 
-    # The Node.js setup and npm install steps are not strictly needed here
-    # if all backend/frontend building is handled by Dockerfiles and docker-compose build.
-    # However, if you have linting or unit tests you run outside of Docker,
-    # you might keep these steps. For this example, we'll focus on Docker Compose.
-
     - name: Verify Docker and Docker Compose Versions
       # This step helps to debug by showing the versions of Docker and Docker Compose
       # available on the GitHub Actions runner.
@@ -50,6 +45,14 @@ jobs:
       # This command will exit with the test result (0 for pass, non-zero for fail).
       run: docker-compose run robot-tests
       working-directory: . # Ensure this runs from the root
+
+    - name: Print Docker Compose Logs on Failure
+      # This step will print the logs of all Docker Compose services if
+      # any previous step in the job fails. This is crucial for debugging
+      # issues in a CI environment where you don't have direct access.
+      if: failure() # Only run this step if a previous step failed
+      run: docker-compose logs
+      working-directory: . # Ensure this runs from the root where docker-compose.yml resides
 
     - name: Collect Robot Framework Results (Optional)
       # Uploads the Robot Framework report and log files as workflow artifacts.
