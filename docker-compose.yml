@@ -20,6 +20,7 @@ services:
       dockerfile: server/Dockerfile # Path to the backend Dockerfile
     ports:
       - "3000:3000" # Map host port 3000 to container port 3000
+    command: sh -c "npm run seed && npm run server-dev"
     environment:
       DB_HOST: mysql # Hostname of the MySQL service within the Docker network
       DB_USER: root
