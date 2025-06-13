@@ -45,11 +45,20 @@ jobs:
     - name: Start Docker Containers
       run: docker compose -f docker-compose.yml up --build -d
 
-    - name: Wait for Backend to be Available
+    - name: Wait for Backend to Start
       run: |
-        echo "Waiting for backend to start..."
-        sleep 10
-        curl --retry 5 --retry-delay 5 --retry-connrefused http://localhost:3000 || exit 1
+        echo "Waiting for backend to be available at http://localhost:3000..."
+        for i in {1..10}; do
+          if curl -s http://localhost:3000 > /dev/null; then
+            echo "✅ Backend is up!"
+            exit 0
+          fi
+          echo "⏳ Backend not ready yet. Retrying in 5s..."
+          sleep 5
+        done
+        echo "❌ Backend failed to start after 10 attempts."
+        exit 1
+
 
     # - name: Install Robot Framework
     #   run: pip install robotframework robotframework-requests
