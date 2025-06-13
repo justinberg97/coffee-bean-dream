@@ -19,34 +19,45 @@ jobs:
     - name: Set up Node.js for Backend
       uses: actions/setup-node@v4
       with:
-        node-version: '20' # Specify a Node.js version compatible with your backend
+        node-version: '20'
 
     - name: Install Backend Dependencies
       run: npm install
-      working-directory: . # Assuming package.json for backend is in the root
+      working-directory: .
 
     # - name: Run Backend Tests
     #   run: npm test
-    #   working-directory: . # Assuming package.json for backend is in the root
+    #   working-directory: .
 
     - name: Set up Node.js for Frontend
       uses: actions/setup-node@v4
       with:
-        node-version: '20' # Specify a Node.js version compatible with your frontend
+        node-version: '20'
 
     - name: Install Frontend Dependencies
       run: npm install
-      working-directory: public/coffee-bean-dream-public/ # Path to your frontend package.json
+      working-directory: public/coffee-bean-dream-public/
 
     # - name: Run Frontend Tests
     #   run: npm test
-    #   working-directory: public/coffee-bean-dream-public/ # Path to your frontend package.json
-
-    - name: Build Backend Docker Image
-      run: docker build -t coffee-bean-dream-backend -f server/Dockerfile .
-
-    - name: Build Frontend Docker Image
-      run: docker build -t coffee-bean-dream-frontend -f public/coffee-bean-dream-public/Dockerfile .
+    #   working-directory: public/coffee-bean-dream-public/
 
     - name: Start Docker Containers
-  run: docker-compose -f docker-compose.yml up --build -d
+      run: docker-compose -f docker-compose.yml up --build -d
+
+    - name: Wait for Backend to be Available
+      run: |
+        echo "Waiting for backend to start..."
+        sleep 10
+        curl --retry 5 --retry-delay 5 --retry-connrefused http://localhost:3000 || exit 1
+
+    # - name: Install Robot Framework
+    #   run: pip install robotframework robotframework-requests
+
+    # - name: Run Robot Tests
+    #   run: robot tests/api_tests/
+
+    - name: Shut Down Containers
+      if: always()
+      run: docker-compose -f docker-compose.yml down
+
