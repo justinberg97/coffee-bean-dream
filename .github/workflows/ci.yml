@@ -16,57 +16,77 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Set up Node.js for Backend
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-
-    - name: Install Backend Dependencies
-      run: npm install
+    - name: Ensure Docker Compose V2 is Used
+      # GitHub Actions runners typically have Docker Compose V2 (docker compose) installed.
+      # This step ensures that if an older 'docker-compose' (with hyphen) exists,
+      # it's removed or symlinked to the newer 'docker compose' for consistency.
+      run: |
+        # Check if the old 'docker-compose' command exists and remove it if it's a symlink
+        if command -v docker-compose &> /dev/null; then
+          echo "Found old 'docker-compose' command. Removing or re-linking to 'docker compose'."
+          # This command might fail if docker-compose is not a symlink or if permissions are an issue.
+          # We will proceed with 'docker compose' anyway.
+          sudo rm -f $(command -v docker-compose) || true
+        fi
+        # Create a symlink from 'docker-compose' to 'docker compose' in a standard PATH location
+        # This makes sure that any script or tool expecting 'docker-compose' will use 'docker compose'.
+        sudo ln -sf /usr/bin/docker /usr/local/bin/docker-compose
       working-directory: .
 
-    # - name: Run Backend Tests
-    #   run: npm test
-    #   working-directory: .
-
-    - name: Set up Node.js for Frontend
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-
-    - name: Install Frontend Dependencies
-      run: npm install
-      working-directory: public/coffee-bean-dream-public/
-
-    # - name: Run Frontend Tests
-    #   run: npm test
-    #   working-directory: public/coffee-bean-dream-public/
-
-    - name: Start Docker Containers
-      run: docker compose -f docker-compose.yml up --build -d
-
-    - name: Wait for Backend to Start
+    - name: Verify Docker and Docker Compose Versions
+      # This step helps to debug by showing the versions of Docker and Docker Compose
+      # available on the GitHub Actions runner.
       run: |
-        echo "Waiting for backend to be available at http://localhost:3000..."
-        for i in {1..10}; do
-          if curl -s http://localhost:3000 > /dev/null; then
-            echo "✅ Backend is up!"
-            exit 0
-          fi
-          echo "⏳ Backend not ready yet. Retrying in 5s..."
-          sleep 5
-        done
-        echo "❌ Backend failed to start after 10 attempts."
-        exit 1
+        docker --version
+        docker compose version # Using the recommended 'docker compose' syntax
+        docker-compose version # Verify that the symlink now works
+      working-directory: .
 
+    - name: Build and Start Docker Compose Services
+      # This command builds all images defined in docker-compose.yml
+      # (e.g., backend, frontend, robot-tests) and starts all services
+      # (mysql, backend, frontend, selenium-chrome) in detached mode (-d).
+      # The '--wait' flag waits for services to be healthy before proceeding.
+      run: docker compose up --build -d --wait # Changed to 'docker compose'
+      working-directory: . # Ensure this runs from the root where docker-compose.yml resides
 
-    # - name: Install Robot Framework
-    #   run: pip install robotframework robotframework-requests
+    - name: Wait for Frontend to be Accessible (Optional but Recommended)
+      # Even with --wait, sometimes the application server itself needs a moment.
+      # This is a simple sleep. For production-grade CI, consider a dedicated
+      # 'wait-for-it.sh' script or polling the frontend's health endpoint.
+      run: sleep 10s
+      working-directory: .
 
-    # - name: Run Robot Tests
-    #   run: robot tests/api_tests/
+    # - name: Run Robot Framework UI Tests
+    #   # Executes the Robot Framework tests within the 'robot-tests' service.
+    #   # The `command` in docker-compose.yml for robot-tests service will be used.
+    #   # This command will exit with the test result (0 for pass, non-zero for fail).
+    #   run: docker compose run robot-tests # Changed to 'docker compose'
+    #   working-directory: . # Ensure this runs from the root
 
-    - name: Shut Down Containers
-      if: always()
-      run: docker compose -f docker-compose.yml down
+    - name: Print Docker Compose Logs on Failure
+      # This step will print the logs of all Docker Compose services if
+      # any previous step in the job fails. This is crucial for debugging
+      # issues in a CI environment where you don't have direct access.
+      if: failure() # Only run this step if a previous step failed
+      run: docker compose logs # Changed to 'docker compose'
+      working-directory: . # Ensure this runs from the root where docker-compose.yml resides
+
+    # - name: Collect Robot Framework Results (Optional)
+    #   # Uploads the Robot Framework report and log files as workflow artifacts.
+    #   # This allows you to download and inspect the results from the GitHub Actions UI.
+    #   if: always() # Run this step even if tests fail
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: robot-framework-results
+    #     path: |
+    #       output.xml
+    #       log.html
+    #       report.html
+
+    - name: Stop and Remove Docker Compose Services
+      # Cleans up the Docker Compose environment after tests are done.
+      if: always() # Ensure cleanup happens even if previous steps fails
+      run: docker compose down --volumes --remove-orphans # Changed to 'docker compose'
+      working-directory: .
 
