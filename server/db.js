@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 
-// Use Railway's MYSQL_URL if provided, otherwise fallback to local values
+// Use Railway's MYSQL_URL if provided, otherwise fallback to the local values
 const DB_URL = process.env.MYSQL_URL || "mysql://root:root@localhost:3306/coffee_db";
 
 const db = new Sequelize(DB_URL, {
