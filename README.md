@@ -36,7 +36,7 @@ Make sure you have the following installed:
 
 1.  Clone the repository:
     ```sh
-    git clone <your-repository-url>
+    git clone [<your-repository-url>](https://github.com/justinberg97/coffee-bean-dream.git)
     ```
 2.  Install dependencies:
     ```sh
@@ -47,6 +47,7 @@ Make sure you have the following installed:
     docker compose up --build
     ```
 4.  Once the build is complete, open your browser and navigate to `http://localhost:80`.
+- This is preferred way to run the application over locally.
 
 ### Run Locally
 
