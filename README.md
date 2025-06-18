@@ -59,7 +59,7 @@ This project is under the MIT License.
 
 ## Bio
 
-My name is Justin Berg. This is my first full-stack project utilizing the Angular framework, as well as the first full-stack project I have worked on completely solo.
+My name is Justin Berg. This is my first full-stack project utilizing the Angular framework, as well as the first full-stack project I have worked on completely solo.\
 Daniel Paiz helped get the project Dockerized to help with easier collaboration. We also collabed on getting Github Actions for CI/CD for deployments. 
 I am a developing programmer trying to enhance my skills and show proficiency in new languages and frameworks. 
 I have been in my role as a Multiverse Apprenctice at Verizon for about 10 weeks now. 
