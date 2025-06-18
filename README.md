@@ -1,64 +1,89 @@
-## Title
+# Coffee Bean Dream
 
-Coffee Bean Dream by Justin Berg 
+> An application for tracking and rating your favorite coffee beans.
 
-## Description/User Story
+Coffee Bean Dream is a full-stack web application designed for coffee enthusiasts to catalog, review, and organize their coffee purchases. It was built using Angular, TypeScript, Node.js, Express, and Sequelize.
 
-This is a fully functional application created with Angular, Typescript, Sequelize, node.JS, and express.JS. 
-This application is to keep track of bags of coffee purchased by the user.
-The User will be able to keep track of bags of coffee purchased by viewing all bags on the homepage.
-The User will be able to add a bag of coffee using the add-item form on the homepage.
-The User will be able to search for bags of coffee using the search bar feature located on the header.
-The User will be able to see all details of a specific bag of coffee by clicking the "details" button on each bag of coffee on the homepage.
-The User will be able to rate the coffee in this view, giving it a 1-5 rating and a detailed written review. 
-The User will be able to view all "rated" coffees in the "Tasted" page.
-User can delete a coffee in the "coffee details section"
-The User will have links to my linkedin, github, and email on the footer.
-The User will will be able to see details about me on the "about me" page. 
+## Key Features
 
-## Table of Contents
-- [Title](#title)
-- [Description](#description)
-- [Features](#features)
-- [On Arrival](#on-arrival)
-- [License](#license)
-- [Bio](#bio)
-- [Links](#links)
+-   **View & Manage Coffee:** See your entire collection on the homepage.
+-   **Add New Coffee:** Easily add new bags of coffee via a simple form.
+-   **Search:** Quickly find specific coffees with the header search bar.
+-   **Detailed View:** Click on any coffee to see more details.
+-   **Rate & Review:** Assign a 1-5 star rating and write detailed tasting notes.
+-   **Tasted Collection:** View all your previously rated coffees on a dedicated "Tasted" page.
+-   **Delete Entries:** Remove coffees from your collection.
 
-Everything you need to keep track of your coffee purchasing and tasting.
+## Tech Stack
 
-## Features 
+-   **Frontend:** Angular, TypeScript
+-   **Backend:** Node.js, Express.js
+-   **Database:** Sequelize (ORM), MySQL
+-   **Containerization:** Docker
+-   **CI/CD:** GitHub Actions
 
-- **Standalone App:** This is a standolne application built in the Angular framework.
-- **Modules:** Modules were used for better organization, in accordance with proper Angular file structure.
-- **Services:** Services were used to create functional communications with the front and back end of the application.
-- **Components:** Components were used to store specific parts of the application's functionality, in accordance with proper Angular file structure.
-- **Routing:** The application uses angular routing for navigation between the app's components, in accordance with proper Angular file structure.
+## Getting Started
 
-## On Arrival 
+Follow these instructions to get a local copy up and running.
 
-Ensure to run the following commands 
+### Prerequisites
 
-1. `npm i` 
-2. `node server/seed.js` 
-3. `npm run server-dev`
-4. In the public folder, run `ng serve`
+Make sure you have the following installed:
+-   Node.js & npm
+-   Docker
+
+### Run with Docker (Recommended)
+
+1.  Clone the repository:
+    ```sh
+    git clone https://github.com/justinberg97/coffee-bean-dream.git
+    ```
+2.  Install dependencies:
+    ```sh
+    npm install
+    ```
+3.  Build and run the Docker containers:
+    ```sh
+    docker compose up --build
+    ```
+4.  Once the build is complete, open your browser and navigate to `http://localhost:80`.
+- This is preferred way to run the application over locally.
+
+### Run Locally
+
+1.  Install dependencies:
+    ```sh
+    npm install
+    ```
+2.  Seed the database:
+    ```sh
+    node server/seed.js
+    ```
+3.  Start the backend server:
+    ```sh
+    npm run server-dev
+    ```
+4.  In a **separate terminal**, navigate to the `public` folder and run the Angular development server:
+    ```sh
+    cd public
+    ng serve
+    ```
+5.  Open your browser and navigate to `http://localhost:4200`.
+
+## About the Author
+
+**Justin Berg**
+
+This project was my first solo full-stack application using the Angular framework. I am a software developer focused on enhancing my skills and demonstrating proficiency in new languages and frameworks.
+
+Special thanks to **Daniel Paiz** for his collaboration on Dockerizing the application and setting up the CI/CD pipeline with GitHub Actions.
+
+Feel free to reach out with any questions you may have.
+
+-   **GitHub**: [github.com/justinberg97](https://github.com/justinberg97)
+-   **LinkedIn**: [linkedin.com/in/justin-berg](https://www.linkedin.com/in/justin-berg-07409518a/)
+-   **Email**: [justinmberg97@gmail.com](mailto:justinmberg97@gmail.com)
 
 ## License
 
-This project is under the MIT License. 
-
-## Bio
-
-My name is Justin Berg.  This is my first full-stack project utilizing the Angular framework, as well as the first full-stack project I have worked on completely solo. 
-I am a developing programmer trying to enhance my skills and show proficiency in new languages and frameworks. 
-I have been in my role as a Multiverse Apprenctice at Verizon for about 10 weeks now. 
-In my free time I love to spend time with my partner Salma and my our dog Latte.  
-Please feel free to reach out with any questions you my have about the project. 
-
-## Links 
-
-Github: https://github.com/justinberg97  
-LinkedIn: https://www.linkedin.com/in/justin-berg-07409518a/
-Email: justinmberg97@gmail.com
-
+This project is licensed under the MIT License.
