@@ -36,7 +36,7 @@ Make sure you have the following installed:
 
 1.  Clone the repository:
     ```sh
-    git clone (https://github.com/justinberg97/coffee-bean-dream.git)
+    git clone https://github.com/justinberg97/coffee-bean-dream.git
     ```
 2.  Install dependencies:
     ```sh
