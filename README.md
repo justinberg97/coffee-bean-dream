@@ -38,7 +38,16 @@ Everything you need to keep track of your coffee purchasing and tasting.
 ## On Arrival 
 
 Ensure to run the following commands 
+### Run with Docker
+1. git clone the project
+2.  `npm i`
+3. `docker compose up --build`
+- Applies docker settings to build the images for front-end, back-end, and MYSQl db
+4. Wait for docker to complete building the images.
+5. Open your browser & visit `localhost` or `localhost:80`
+- The pathing has been adjusted so it is easier to `Run with Docker` instead of running locally.
 
+### Run Locally
 1. `npm i` 
 2. `node server/seed.js` 
 3. `npm run server-dev`
@@ -50,7 +59,8 @@ This project is under the MIT License.
 
 ## Bio
 
-My name is Justin Berg.  This is my first full-stack project utilizing the Angular framework, as well as the first full-stack project I have worked on completely solo. 
+My name is Justin Berg. This is my first full-stack project utilizing the Angular framework, as well as the first full-stack project I have worked on completely solo.
+Daniel Paiz helped get the project Dockerized to help with easier collaboration. We also collabed on getting Github Actions for CI/CD for deployments. 
 I am a developing programmer trying to enhance my skills and show proficiency in new languages and frameworks. 
 I have been in my role as a Multiverse Apprenctice at Verizon for about 10 weeks now. 
 In my free time I love to spend time with my partner Salma and my our dog Latte.  
