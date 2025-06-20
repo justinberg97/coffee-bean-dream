@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "description": "Coffee Bean Dream",
   "main": "server.js",
-  "scripts": {
-    "test": "jest",
-    "server-dev": "nodemon server.js",
-    "seed": "node server/seed.js",
-    "start": "node server.js"
-  },
+"scripts": {
+  "test": "jest",
+  "start": "node server.js",
+  "postinstall": "cd public/coffee-bean-dream-public && npm install && npm run build",
+  "server-dev": "nodemon server.js",
+  "seed": "node server/seed.js"
+}
+
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "ISC",v
   "dependencies": {
     "@babel/preset-env": "^7.15.0",
     "cors": "^2.8.5",
