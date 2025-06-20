@@ -13,14 +13,14 @@ app.use(express.json());
 // API routes first
 app.use("/api", require("./routes"));
 
-// Serve Angular static files
-const angularDistPath = path.join(process.cwd(), "public", "coffee-bean-dream-public", "dist", "coffee-bean-dream-public");
-app.use(express.static(angularDistPath));
+// // Serve Angular static files
+// const angularDistPath = path.join(process.cwd(), "public", "coffee-bean-dream-public", "dist", "coffee-bean-dream-public");
+// app.use(express.static(angularDistPath));
 
-// Angular fallback route (must come *after* /api and static routes)
-app.get("*", (req, res) => {
-  res.sendFile(path.join(angularDistPath, "index.html"));
-});
+// // Angular fallback route (must come *after* /api and static routes)
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(angularDistPath, "index.html"));
+// });
 
 // 404 for anything else
 app.use((req, res) => {
