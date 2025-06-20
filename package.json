@@ -9,11 +9,11 @@
   "postinstall": "cd public/coffee-bean-dream-public && npm install && npm run build",
   "server-dev": "nodemon server.js",
   "seed": "node server/seed.js"
-}
+},
 
   "keywords": [],
   "author": "",
-  "license": "ISC",v
+  "license": "ISC",
   "dependencies": {
     "@babel/preset-env": "^7.15.0",
     "cors": "^2.8.5",
