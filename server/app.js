@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("/api", require("./routes"));
 
 // Serve Angular static files
-const angularDistPath = path.join(__dirname, "../public/coffee-bean-dream-public/dist");
+const angularDistPath = path.join(__dirname, "../../public/coffee-bean-dream-public/dist");
 app.use(express.static(angularDistPath));
 
 // Angular fallback route (must come *after* /api and static routes)
