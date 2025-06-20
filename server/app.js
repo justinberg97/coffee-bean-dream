@@ -10,19 +10,19 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// API routes
+// API routes first
 app.use("/api", require("./routes"));
 
-// ✅ Serve Angular static build
-const angularDistPath = path.join(__dirname, "../public/coffee-bean-dream-public/dist/coffee-bean-dream-public");
+// Serve Angular static files
+const angularDistPath = path.join(__dirname, "../public/coffee-bean-dream-public/dist");
 app.use(express.static(angularDistPath));
 
-// ✅ Fallback for Angular routing (must go after static + /api routes)
+// Angular fallback route (must come *after* /api and static routes)
 app.get("*", (req, res) => {
   res.sendFile(path.join(angularDistPath, "index.html"));
 });
 
-// ❌ Keep this 404 handler LAST
+// 404 for anything else
 app.use((req, res) => {
   res.status(404).send({
     error: "404 - Not Found",
@@ -42,6 +42,7 @@ app.use((error, req, res, next) => {
 });
 
 module.exports = app;
+
 
 
 
